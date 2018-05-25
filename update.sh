@@ -1,26 +1,24 @@
 #!/usr/bin/env bash
 #
-# This script file generates Dockerfile for different architectures
+# This script file generates Dockerfile for arm64v8 architectures
 
 set -eu -o pipefail
 
-SOURCE_FOLDERS=(debian-python3 debian)
-ARCHS=(amd64 arm64v8)
+declare -A FOLDER_FROMS
+FOLDER_FROMS[debian]=resin/aarch64-debian:stretch
+FOLDER_FROMS[debian-python3]=resin/aarch64-python:3.6-slim
 
-for folder in "${SOURCE_FOLDERS[@]}"; do
-    dockerfile="${folder}"/Dockerfile
+for folder in "${!FOLDER_FROMS[@]}"; do
+	dockerfile="${folder}"/Dockerfile
+	arch_dockerfile="${dockerfile}".arm64v8
+	cat > "${arch_dockerfile}" <<- EOH
+		#
+		# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
+		#
+		# PLEASE DO NOT EDIT IT DIRECTLY.
+		#
 
-    for arch in "${ARCHS[@]}"; do
-        arch_dockerfile="${dockerfile}"."${arch}"
-        cat > "${arch_dockerfile}" <<- EOH
-			#
-			# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
-			#
-			# PLEASE DO NOT EDIT IT DIRECTLY.
-			#
-
-EOH
-        cat "${dockerfile}" >> "${arch_dockerfile}"
-        sed -i "s/FROM *\\([[:alnum:]]*\\):/FROM ${arch}\\/\\1:/" "$arch_dockerfile"
-    done
+	EOH
+	cat "${dockerfile}" >> "${arch_dockerfile}"
+	sed -i "s|^FROM.*$|FROM ${FOLDER_FROMS[${folder}]}|" "${arch_dockerfile}"
 done
