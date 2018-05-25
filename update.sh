@@ -11,7 +11,7 @@ for folder in "${SOURCE_FOLDERS[@]}"; do
     dockerfile="${folder}"/Dockerfile
 
     for arch in "${ARCHS[@]}"; do
-        arch_dockerfile="${dockerfile}"-"${arch}"
+        arch_dockerfile="${dockerfile}"."${arch}"
         cat > "${arch_dockerfile}" <<- EOH
 			#
 			# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
