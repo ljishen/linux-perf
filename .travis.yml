@@ -10,14 +10,14 @@ env:
   global:
     - IMAGE_NAME=ljishen/perf
     - ARCH=arm64v8
-    - DOCKERFILE=Dockerfile."${ARCH}"
+    - DOCKERFILE=Dockerfile.arm64v8
 
 script:
   # Configure binfmt-support on the Docker host
   # See https://github.com/multiarch/alpine
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-  # Build "${ARCH}" image
+  # Build arm64v8 image
   - docker build -t "${IMAGE_NAME}":"${ARCH}"-latest -t "${IMAGE_NAME}":"${ARCH}"-4.9 . -f debian/"${DOCKERFILE}"
   - docker build -t "${IMAGE_NAME}":"${ARCH}"-4.9-python3 . -f debian-python3/"${DOCKERFILE}"
 
