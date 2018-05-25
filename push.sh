@@ -8,7 +8,7 @@
 set -eu -o pipefail
 
 IMAGE_NAME=ljishen/perf
-TAGS=(4.9 4.9-python3)
+TAGS=(latest 4.9 4.9-python3)
 
 for tag in "${TAGS[@]}"; do
     docker manifest create "${IMAGE_NAME}":"${tag}" "${IMAGE_NAME}":amd64-"${tag}" "${IMAGE_NAME}":arm64v8-"${tag}"

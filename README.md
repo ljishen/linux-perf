@@ -8,13 +8,13 @@ perf is a Performance analysis tools for Linux. Now is available using `docker r
 
 ## Supported Tags
 
-- [`4.9`](debian/Dockerfile), [`latest`](debian/Dockerfile)
-- [`4.9-python3`](debian-python3/Dockerfile)
+- [`latest`](https://github.com/ljishen/linux-perf/tree/master/debian), [`4.9`](https://github.com/ljishen/linux-perf/tree/master/debian)
+- [`4.9-python3`](https://github.com/ljishen/linux-perf/tree/master/debian-python3)
 
 
 ## Supported Architectures
 
-[`amd64`](update.sh), [`arm64v8`](update.sh)
+`amd64`, `arm64v8`
 
 
 ## Example Usage
