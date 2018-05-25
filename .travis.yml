@@ -10,7 +10,7 @@ env:
   global:
     - IMAGE_NAME=ljishen/perf
     - ARCH=arm64v8
-    - DOCKERFILE=Dockerfile.arm64v8
+    - DOCKERFILE=Dockerfile.${ARCH}
 
 script:
   # Configure binfmt-support on the Docker host
