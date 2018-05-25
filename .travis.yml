@@ -13,9 +13,6 @@ env:
     - DOCKERFILE=Dockerfile.arm64v8
 
 script:
-  # Generate the Dockerfile for arm64v8 architectures
-  - bash update.sh
-
   # Configure binfmt-support on the Docker host
   # See https://github.com/multiarch/alpine
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
